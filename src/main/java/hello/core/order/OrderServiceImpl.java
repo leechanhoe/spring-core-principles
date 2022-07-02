@@ -1,5 +1,6 @@
 package hello.core.order;
 
+import hello.core.annotation.MainDiscountPolicy;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
@@ -39,8 +40,8 @@ public class OrderServiceImpl implements OrderService {
     private final MemberRepository memberRepository; // final 이 붙어있으면 누락 방지도 가능
     private final DiscountPolicy discountPolicy;
 
-    @Autowired // 생성자 주입 방식
-    public OrderServiceImpl(MemberRepository memberRepository, /*@Qualifier("mainDiscountPolicy")*/ DiscountPolicy discountPolicy) {
+    @Autowired // 생성자 주입 방식                                                                 // @qualifier랑 같은 효과"
+    public OrderServiceImpl(MemberRepository memberRepository, /*@Qualifier("mainDiscountPolicy")*/ @MainDiscountPolicy DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy; // 빈에 똑같은 타입이 2가지일때 필드명이나 파라미터 명으로도 구분해서 불러오기 가능
     }
